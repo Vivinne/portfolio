@@ -5,13 +5,17 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
-    "build:dev": "node build.mjs --dev"
+    "build:dev": "node build.mjs --dev",
+    "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "esbuild": "^0.28.2"
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^6.0.3"
   }
 }

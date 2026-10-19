@@ -1,4 +1,4 @@
-/* Build: bundles app/src with esbuild and writes the site to the repository root
+/* Build: bundles app/src (TypeScript + JSX) with esbuild and writes the site to the repository root
    (index.html + assets/). Only assets/ and the root index.html are replaced; img/ is untouched.
    node build.mjs          production build
    node build.mjs --dev    unminified, React development mode (shows React warnings in the console) */
@@ -19,7 +19,7 @@ mkdirSync(out, { recursive: true });
 
 const result = await esbuild.build({
   absWorkingDir: here,
-  entryPoints: ['src/main.jsx'],
+  entryPoints: ['src/main.tsx'],
   bundle: true,
   splitting: true,
   format: 'esm',
@@ -36,7 +36,7 @@ const result = await esbuild.build({
   logLevel: 'warning',
 });
 
-const entry = Object.entries(result.metafile.outputs).find(([, o]) => o.entryPoint === 'src/main.jsx');
+const entry = Object.entries(result.metafile.outputs).find(([, o]) => o.entryPoint === 'src/main.tsx');
 const js = relative(site, join(here, entry[0]));
 const css = relative(site, join(here, entry[1].cssBundle));
 const html = readFileSync(join(here, 'index.html'), 'utf8').replace('%JS%', './' + js).replace('%CSS%', './' + css);

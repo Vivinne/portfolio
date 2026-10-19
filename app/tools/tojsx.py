@@ -79,18 +79,18 @@ def module(name, nodes, imports, header):
     body = []
     for c in nodes: body += emit(c, 3)
     src = header + '\n' + imports + '\n\nexport default function %s() {\n  return (\n    <>\n%s\n    </>\n  );\n}\n' % (os.path.basename(name), '\n'.join(body))
-    open(os.path.join(OUT, name + '.jsx'), 'w', encoding='utf8').write(src)
+    open(os.path.join(OUT, name + '.tsx'), 'w', encoding='utf8').write(src)
     return len(src)
 
 HDR = '/* Generated from the published page by app/tools/tojsx.py, then kept as source. Text is the original copy; do not edit wording here without the owner\'s review. */'
 os.makedirs(OUT + '/works', exist_ok=True)
 about = find(tree, byid('panel-about'))
-print('About', module('About', about['c'], "import Img from './Img.jsx';\nimport MailCopy from './MailCopy.jsx';", HDR))
+print('About', module('About', about['c'], "import MailCopy from './MailCopy';", HDR))
 windex = find(tree, lambda n: attr(n, 'class') == 'windex')
-print('WorksIndex', module('WorksIndex', [windex], "import Img from './Img.jsx';", HDR))
+print('WorksIndex', module('WorksIndex', [windex], "import Img from './Img';", HDR))
 for i in range(1, 8):
     w = find(tree, byid('panel-w0%d' % i))
-    print('W0%d' % i, module('works/W0%d' % i, w['c'], "import Img from '../Img.jsx';", HDR))
+    print('W0%d' % i, module('works/W0%d' % i, w['c'], "import Img from '../Img';", HDR))
 # work tab data
 tabs = []
 for i in range(1, 8):

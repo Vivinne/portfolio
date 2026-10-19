@@ -1,5 +1,5 @@
 /* Generated from the published page by app/tools/tojsx.py, then kept as source. Text is the original copy; do not edit wording here without the owner's review. */
-import Img from '../Img.jsx';
+import Img from '../Img';
 
 export default function W01() {
   return (
