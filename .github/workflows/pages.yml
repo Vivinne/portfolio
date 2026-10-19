@@ -1,10 +1,11 @@
-# Builds the Next.js static export and publishes it to GitHub Pages on every push to main.
+# Builds the Next.js static export; on main it is also published to GitHub Pages.
+# (Other listed branches only build, as a check.)
 # One-time setup: repository Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, nextjs]
   workflow_dispatch:
 
 permissions:
@@ -32,6 +33,7 @@ jobs:
           path: out
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
