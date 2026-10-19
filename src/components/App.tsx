@@ -1,3 +1,5 @@
+'use client';
+
 import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ComponentType, KeyboardEvent, LazyExoticComponent, MouseEvent, SyntheticEvent } from 'react';
 import About from './About';
@@ -39,6 +41,12 @@ function prefetch(id: string): void {
   prefetched.add(id);
   LOADERS[id]().catch(() => prefetched.delete(id));
 }
+
+/* theme chosen earlier on this device (otherwise the system setting decides, via CSS) */
+try {
+  const saved = localStorage.getItem('vivinne-theme');
+  if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+} catch { /* storage blocked */ }
 
 const phone = window.matchMedia('(max-width: 760px)');
 const darkPref = window.matchMedia('(prefers-color-scheme: dark)');

@@ -3,9 +3,9 @@ import { useEffect, useRef } from 'react';
 /* Images load on approach. Until the real file arrives each <img> shows an empty SVG of the same
    width x height (so the layout is already final) on a flat average colour. On the published site
    the file comes from jsDelivr (the GitHub repo through a CDN); if the CDN fails, that image and every
-   later one fall back to the file next to index.html. ?cdn=1 / ?cdn=0 forces either mode for testing. */
+   later one fall back to the file served with the site. ?cdn=1 / ?cdn=0 forces either mode for testing. */
 
-const CDN = 'https://cdn.jsdelivr.net/gh/Vivinne/portfolio@main/';
+const CDN = 'https://cdn.jsdelivr.net/gh/Vivinne/portfolio@main/public/';   // the repo keeps the images in public/img
 const CDN_HOSTS: readonly string[] = ['vivinne.github.io'];
 const NEAR = '1000px 0px';
 
